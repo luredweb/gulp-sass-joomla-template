@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die;
 
-class = "";
+$class = "";
 $toggle = "";
 
 $title = $item->anchor_title ? 'title="' . $item->anchor_title . '" ' : '';
