@@ -10,21 +10,10 @@
 defined('_JEXEC') or die;
 
 ?>
-<nav class="navbar navbar-default">
-	<!-- Brand and toggle get grouped for better mobile display -->
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#module-<?php echo $module->id ?>" aria-expanded="false">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-		<a class="navbar-brand" href="#">Brand</a>
-	</div>
 
-	<div class="collapse navbar-collapse" id="module-<?php echo $module->id ?>">
+<div class="extensions-wrapper" id="module-<?php echo $module->id ?>">
 	<?php // The menu class is deprecated. Use nav instead. ?>
-		<ul class="nav navbar-nav menu<?php echo $class_sfx;?>"<?php
+		<div class="extensions<?php echo $class_sfx;?>"<?php
 			$tag = '';
 
 			if ($params->get('tag_id') != null)
@@ -36,7 +25,7 @@ defined('_JEXEC') or die;
 		<?php
 		foreach ($list as $i => &$item)
 		{
-			$class = 'item-' . $item->id;
+			$class = 'extension item-' . $item->id;
 
 			if (($item->id == $active_id) OR ($item->type == 'alias' AND $item->params->get('aliasoptions') == $active_id))
 			{
@@ -81,7 +70,7 @@ defined('_JEXEC') or die;
 				$class = ' class="' . trim($class) . '"';
 			}
 
-			echo '<li' . $class . '>';
+			echo '<div' . $class . '>';
 
 			// Render the menu item.
 			switch ($item->type) :
@@ -100,20 +89,19 @@ defined('_JEXEC') or die;
 			// The next item is deeper.
 			if ($item->deeper)
 			{
-				echo '<ul class="nav-child unstyled small dropdown-menu">';
+				echo '<div class="nav-child unstyled small dropdown-menu">';
 			}
 			elseif ($item->shallower)
 			{
 				// The next item is shallower.
-				echo '</li>';
-				echo str_repeat('</ul></li>', $item->level_diff);
+				echo '</div>';
+				echo str_repeat('</div></div>', $item->level_diff);
 			}
 			else
 			{
 				// The next item is on the same level.
-				echo '</li>';
+				echo '</div>';
 			}
 		}
-		?></ul>
+		?></div>
 	</div>
-</nav>
